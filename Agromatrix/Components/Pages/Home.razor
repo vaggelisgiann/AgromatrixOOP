@@ -1,0 +1,136 @@
+﻿@page "/"
+@rendermode InteractiveServer
+
+<PageTitle>HOME</PageTitle>
+
+
+<!-- This class contains the main container, which includes the image carousel and the text container -->
+
+<div class="main_container">
+    <div class="image_container">
+        <div class="image_carousel">
+
+          <!-- Bootstrap Carousel for image slideshow -->
+            <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+  <div class="carousel-inner">
+    <!-- The carousel items, contained in the wwwroot file -->
+    <div class="carousel-item active">
+      <!-- This class contains the image for the first slide -->
+      <img class="d-block w-100" src="fendt.jpg" alt="First slide">
+      <!-- This class contains the caption for the first slide -->
+      <div class="carousel-caption d-none d-md-block">
+    <h1>FEATURING: TRACTOR PARTS</h1>
+  </div>
+    </div>
+
+    <div class="carousel-item">
+      <img class="d-block w-100" src="jdcombine.jpg" alt="Third slide">
+      <div class="carousel-caption d-none d-md-block">
+    <h1>FEATURING: COMBINE HARVESTER PARTS</h1>
+  </div>
+    </div>
+
+    <div class="carousel-item">
+      <img class="d-block w-100" src="claasjaguar.jpg" alt="Fourth slide">
+      <div class="carousel-caption d-none d-md-block">
+    <h1>FEATURING: FORAGE HARVESTER PARTS</h1>
+  </div>
+    </div>
+
+  <div class="carousel-item">
+      <img class="d-block w-100" src="parts.jpg" alt="Second slide">
+      <div class="carousel-caption d-none d-md-block">
+    <h1>FEATURING: GENERAL SERVICE PARTS</h1>
+  </div>
+    </div>
+
+    <div class="carousel-item">
+      <img class="d-block w-100" src="farminggps.jpg" alt="Fifth slide">
+      <div class="carousel-caption d-none d-md-block">
+    <h1>FEATURING: GPS AND AUTOSTEER</h1>
+  </div>
+    </div>
+
+<div class="carousel-item">
+      <img class="d-block w-100" src="farmingdrone.jpg" alt="Sixth slide">
+      <div class="carousel-caption d-none d-md-block">
+    <h1>FEATURING: SMART FARMING DRONES</h1>
+  </div>
+    </div>
+
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
+        </div>
+    </div>
+    <div class="text_container">
+        <div class="background">
+            <div class="text_content">
+              <h2>We offer a wide range of high quality agricultural machinery parts</h2>
+              <h2>From nuts and bolts to engine blocks and rotors, our parts are tested in the real world at the toughest conditions</h2>
+              <h2>With a greater life expectancy, our parts reduce operating costs and feature a 2 year warranty with 24/7 support</h2>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+<!-- This class contains the product buttons and loading bar -->
+<div class="product_buttons">
+  <!-- This container holds the buttons for different product categories -->
+  <div class="buttons_container">
+    
+    <div class="product_item">
+    <NavLink class="product_button" href="/shopnow?category=Tractor%20Parts">
+    <img src="tractor.png" alt="Tractor Parts">
+</NavLink>
+    <span class="product_text">TRACTOR PARTS</span>
+</div>
+
+<div class="product_item">
+    <NavLink class="product_button" href="/shopnow?category=Combine%20Parts">
+    <img src="combine.png" alt="Combine Harvester Parts">
+</NavLink>
+    <span class="product_text">COMBINE PARTS</span>
+</div>
+<div class="product_item">
+    <NavLink class="product_button" href="/shopnow?category=Forage%20Parts">
+    <img src="forageharvester.png" alt="Forage Harvester Parts">
+</NavLink>
+    <span class="product_text">FORAGE PARTS</span>
+</div>
+
+<div class="product_item">
+    <NavLink class="product_button" href="/shopnow?category=General%20Parts">
+    <img src="spare-parts.png" alt="General Service Parts">
+</NavLink>
+    <span class="product_text">GENERAL PARTS</span>
+</div>
+
+<div class="product_item">
+    <NavLink class="product_button" href="/shopnow?category=GPS%20And%20Autosteer">
+    <img src="gps-location.png" alt="GPS and Autosteer Parts">
+</NavLink>
+    <span class="product_text">GPS & AUTOSTEER</span>
+</div>
+
+<div class="product_item">
+    <NavLink class="product_button" href="/shopnow?category=Farming%20Drones">
+    <img src="smart-drone.png" alt="Smart Farming Drones">
+</NavLink>
+    <span class="product_text">FARMING DRONES</span>
+</div>
+  </div>
+  <!-- This class contains the loading bar -->
+  <div class="loading_bar">
+
+  </div>
+
+</div>

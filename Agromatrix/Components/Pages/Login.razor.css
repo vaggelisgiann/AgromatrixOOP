@@ -1,0 +1,17 @@
+:host {
+    font-family: 'League Spartan', sans-serif;
+}
+h1{
+    font-family: 'League Spartan', sans-serif;
+    font-weight: bold;
+}
+.btn {
+    font-family: 'League Spartan', sans-serif;
+    background-color: #00bf63;
+    border: none;
+}
+.mb-3 label {
+    justify-content: center;
+    font-family: 'League Spartan', sans-serif;
+    align-items: center;
+}

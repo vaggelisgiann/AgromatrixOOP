@@ -1,0 +1,57 @@
+﻿@inherits LayoutComponentBase
+
+<div class="page">
+    <div class="sidebar">
+        <NavMenu />
+    </div>
+
+    <main>
+        <div class="top-row px-4">
+            <!--This class contains the gif logo that switches to a static logo after playing once-->
+            <div id="gif-container" class="logo-container">
+                <img id="intro-gif" src="AGROMATRIX.gif" class="logo" />
+            </div>
+            <div id="logo-container" class="logo-container" style="display: none;">
+                <img src="AGROMATRIX.png" class="logo" />
+            </div>
+
+            <!-- Navigation links and buttons -->
+            <div class="nav_links">
+                <!--Buttnons container-->
+                <div class="buttons">
+                    <div class="btn_link">AGRICULTURAL PARTS</div>
+                    <div class="btn_link">SMART FARMING SOLUTIONS</div>
+                    <div class="btn_link">FABRICATION WORKS</div>
+                </div>
+
+                <div class="cart"><NavLink class="cart-button" href="/cart"><img src="Cart.png" alt="Cart"></NavLink></div>
+            </div>
+            
+            <!--<a href="https://learn.microsoft.com/aspnet/core/" target="_blank">About</a>-->
+        </div>
+
+        <article class="content px-4">
+            @Body
+        </article>
+    </main>
+
+    <script>
+        // JavaScript to handle GIF to static image switch
+        document.addEventListener('DOMContentLoaded', function() {
+            const gif = document.getElementById('intro-gif');
+            const gifContainer = document.getElementById('gif-container');
+            const logoContainer = document.getElementById('logo-container');
+            
+            setTimeout(function() {
+                gifContainer.style.display = 'none';
+                logoContainer.style.display = 'flex';
+            }, 5000);
+        });
+    </script>
+</div>
+<!-- Blazor error UI -->
+<div id="blazor-error-ui" data-nosnippet>
+    An unhandled error has occurred.
+    <NavLink href="." class="reload">Reload</NavLink>
+    <span class="dismiss">🗙</span>
+</div>

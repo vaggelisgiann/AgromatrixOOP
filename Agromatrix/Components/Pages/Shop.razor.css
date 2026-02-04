@@ -1,0 +1,18 @@
+h1{
+   color: black;
+   font-family: 'League Spartan', sans-serif;
+   font-weight: bold;
+}
+
+.table {
+    font-family: 'League Spartan', sans-serif;
+    text-align: center;
+}
+td div {
+    max-width: 400px;
+}
+.btn-primary {
+    background-color: #00bf63;
+    border-color: #00bf63;
+    font-family: 'League Spartan', sans-serif;
+}

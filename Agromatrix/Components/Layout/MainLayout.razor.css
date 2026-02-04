@@ -1,0 +1,153 @@
+.page { /* Wrapper for sidebar and main content */
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+main {/* Main content area */
+    flex: 1;
+}
+
+.sidebar { /* Sidebar styles */
+    background-image: linear-gradient(180deg,#00bf63);
+}
+
+.logo-container { /* Logo container styles */
+    display: flex;
+    align-items: left;
+    margin-right: auto;
+    height: 150px;
+    width: auto;
+}
+
+.top-row { /* Top navigation row */
+    background-color: white;
+    justify-content: flex-start;
+    height: 9.3rem;
+    display: flex;
+    align-items: center;
+}
+
+    .top-row ::deep a, .top-row ::deep .btn-link { /* Links in top row */
+        white-space: nowrap;
+        margin-left: 1.5rem;
+        text-decoration: none;
+    }
+
+    .top-row ::deep a:hover, .top-row ::deep .btn-link:hover { /* Hover effect for links */
+        text-decoration: underline;
+    }
+
+    .top-row ::deep a:first-child { /* First link in top row */
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+@media (max-width: 640.98px) { /* Mobile styles */
+    .top-row {
+        justify-content: space-between;
+    }
+
+    .top-row ::deep a, .top-row ::deep .btn-link { /* Links in top row on mobile */
+        margin-left: 0;
+    }
+}
+
+@media (min-width: 641px) { /* Desktop styles */
+    .page { /* Wrapper for sidebar and main content on desktop */
+        flex-direction: row;
+    }
+
+    .sidebar { /* Sidebar styles on desktop */
+        width: 250px;
+        height: 100vh;
+        position: sticky;
+        top: 0;
+    }
+
+    .top-row { /* Top navigation row on desktop */
+        position: sticky;
+        top: 0;
+        z-index: 1;
+    }
+
+    .top-row.auth ::deep a:first-child { /* First link in top row when authenticated */
+        flex: 1;
+        text-align: right;
+        width: 0;
+    }
+
+    .top-row, article { /* Padding for top row and article on desktop */
+        padding-left: 2rem !important;
+        padding-right: 1.5rem !important;
+    }
+}
+
+#blazor-error-ui {
+    color-scheme: light only;
+    background: lightyellow;
+    bottom: 0;
+    box-shadow: 0 -1px 2px rgba(0, 0, 0, 0.2);
+    box-sizing: border-box;
+    display: none;
+    left: 0;
+    padding: 0.6rem 1.25rem 0.7rem 1.25rem;
+    position: fixed;
+    width: 100%;
+    z-index: 1000;
+}
+
+    #blazor-error-ui .dismiss {
+        cursor: pointer;
+        position: absolute;
+        right: 0.75rem;
+        top: 0.5rem;
+    }
+
+.nav_links {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    margin-right: auto;
+    margin-left: 0; 
+    gap:10rem;
+
+}
+
+.buttons {
+    display: flex;
+    gap: 5rem;                 
+    justify-content: space-between;
+    width: 100%;               
+    margin-top: 1rem;
+}
+ .btn_link{
+    color: black;
+    background-color: transparent;
+    border: none;
+    font-family: 'League Spartan';
+    font-size: 25px;
+    
+ }
+
+ .btn_link:hover{
+    transform: scale(1.2);
+    transition: 0.2s;
+ }
+
+ .cart{
+    margin-left: auto;
+ }
+    .cart-button{
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+    }
+    .cart-button img{
+        width: 70px;
+        height: auto;
+    }
+    .cart-button:hover{
+        transform: scale(1.2);
+        transition: 0.2s;
+    }

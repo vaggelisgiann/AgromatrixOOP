@@ -1,0 +1,729 @@
+/* /Components/Layout/MainLayout.razor.rz.scp.css */
+.page[b-8vr0taecsz] { /* Wrapper for sidebar and main content */
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+main[b-8vr0taecsz] {/* Main content area */
+    flex: 1;
+}
+
+.sidebar[b-8vr0taecsz] { /* Sidebar styles */
+    background-image: linear-gradient(180deg,#00bf63);
+}
+
+.logo-container[b-8vr0taecsz] { /* Logo container styles */
+    display: flex;
+    align-items: left;
+    margin-right: auto;
+    height: 150px;
+    width: auto;
+}
+
+.top-row[b-8vr0taecsz] { /* Top navigation row */
+    background-color: white;
+    justify-content: flex-start;
+    height: 9.3rem;
+    display: flex;
+    align-items: center;
+}
+
+    .top-row[b-8vr0taecsz]  a, .top-row[b-8vr0taecsz]  .btn-link { /* Links in top row */
+        white-space: nowrap;
+        margin-left: 1.5rem;
+        text-decoration: none;
+    }
+
+    .top-row[b-8vr0taecsz]  a:hover, .top-row[b-8vr0taecsz]  .btn-link:hover { /* Hover effect for links */
+        text-decoration: underline;
+    }
+
+    .top-row[b-8vr0taecsz]  a:first-child { /* First link in top row */
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+@media (max-width: 640.98px) { /* Mobile styles */
+    .top-row[b-8vr0taecsz] {
+        justify-content: space-between;
+    }
+
+    .top-row[b-8vr0taecsz]  a, .top-row[b-8vr0taecsz]  .btn-link { /* Links in top row on mobile */
+        margin-left: 0;
+    }
+}
+
+@media (min-width: 641px) { /* Desktop styles */
+    .page[b-8vr0taecsz] { /* Wrapper for sidebar and main content on desktop */
+        flex-direction: row;
+    }
+
+    .sidebar[b-8vr0taecsz] { /* Sidebar styles on desktop */
+        width: 250px;
+        height: 100vh;
+        position: sticky;
+        top: 0;
+    }
+
+    .top-row[b-8vr0taecsz] { /* Top navigation row on desktop */
+        position: sticky;
+        top: 0;
+        z-index: 1;
+    }
+
+    .top-row.auth[b-8vr0taecsz]  a:first-child { /* First link in top row when authenticated */
+        flex: 1;
+        text-align: right;
+        width: 0;
+    }
+
+    .top-row[b-8vr0taecsz], article[b-8vr0taecsz] { /* Padding for top row and article on desktop */
+        padding-left: 2rem !important;
+        padding-right: 1.5rem !important;
+    }
+}
+
+#blazor-error-ui[b-8vr0taecsz] {
+    color-scheme: light only;
+    background: lightyellow;
+    bottom: 0;
+    box-shadow: 0 -1px 2px rgba(0, 0, 0, 0.2);
+    box-sizing: border-box;
+    display: none;
+    left: 0;
+    padding: 0.6rem 1.25rem 0.7rem 1.25rem;
+    position: fixed;
+    width: 100%;
+    z-index: 1000;
+}
+
+    #blazor-error-ui .dismiss[b-8vr0taecsz] {
+        cursor: pointer;
+        position: absolute;
+        right: 0.75rem;
+        top: 0.5rem;
+    }
+
+.nav_links[b-8vr0taecsz] {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    margin-right: auto;
+    margin-left: 0; 
+    gap:10rem;
+
+}
+
+.buttons[b-8vr0taecsz] {
+    display: flex;
+    gap: 5rem;                 
+    justify-content: space-between;
+    width: 100%;               
+    margin-top: 1rem;
+}
+ .btn_link[b-8vr0taecsz]{
+    color: black;
+    background-color: transparent;
+    border: none;
+    font-family: 'League Spartan';
+    font-size: 25px;
+    
+ }
+
+ .btn_link:hover[b-8vr0taecsz]{
+    transform: scale(1.2);
+    transition: 0.2s;
+ }
+
+ .cart[b-8vr0taecsz]{
+    margin-left: auto;
+ }
+    .cart-button[b-8vr0taecsz]{
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+    }
+    .cart-button img[b-8vr0taecsz]{
+        width: 70px;
+        height: auto;
+    }
+    .cart-button:hover[b-8vr0taecsz]{
+        transform: scale(1.2);
+        transition: 0.2s;
+    }
+/* /Components/Layout/NavMenu.razor.rz.scp.css */
+.navbar-toggler[b-beekq0n1sl] {
+    appearance: none;
+    cursor: pointer;
+    width: 3.5rem;
+    height: 2.5rem;
+    color: white;
+    position: absolute;
+    top: 0.5rem;
+    right: 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 0.55%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") no-repeat center/1.75rem rgba(255, 255, 255, 0.1);
+}
+
+.navbar-toggler:checked[b-beekq0n1sl] {
+    /*background-color: rgba(255, 255, 255, 0.5);*/
+}
+
+.top-row[b-beekq0n1sl] {
+    min-height: 3.5rem;
+    background-color: rgba(0,0,0,0.4);
+}
+
+.navbar-brand[b-beekq0n1sl] {
+    font-size: 1.1rem;
+}
+
+.bi[b-beekq0n1sl] {
+    display: inline-block;
+    position: relative;
+    width: 1.25rem;
+    height: 1.25rem;
+    margin-right: 0.75rem;
+    top: -1px;
+    background-size: cover;
+}
+
+.bi-house-door-fill-nav-menu[b-beekq0n1sl] {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='white' class='bi bi-house-door-fill' viewBox='0 0 16 16'%3E%3Cpath d='M6.5 14.5v-3.505c0-.245.25-.495.5-.495h2c.25 0 .5.25.5.5v3.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5Z'/%3E%3C/svg%3E");
+}
+
+.bi-plus-square-fill-nav-menu[b-beekq0n1sl] {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='white' class='bi bi-plus-square-fill' viewBox='0 0 16 16'%3E%3Cpath d='M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm6.5 4.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3a.5.5 0 0 1 1 0z'/%3E%3C/svg%3E");
+}
+
+.bi-list-nested-nav-menu[b-beekq0n1sl] {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='white' class='bi bi-list-nested' viewBox='0 0 16 16'%3E%3Cpath fill-rule='evenodd' d='M4.5 11.5A.5.5 0 0 1 5 11h10a.5.5 0 0 1 0 1H5a.5.5 0 0 1-.5-.5zm-2-4A.5.5 0 0 1 3 7h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm-2-4A.5.5 0 0 1 1 3h10a.5.5 0 0 1 0 1H1a.5.5 0 0 1-.5-.5z'/%3E%3C/svg%3E");
+}
+
+.nav-item[b-beekq0n1sl] {
+    font-size: 1.4rem;
+    padding-bottom: 1.3rem;
+    font-family: 'League Spartan', sans-serif;
+    font-weight: bold;
+    text-align: center;
+}
+
+    .nav-item:first-of-type[b-beekq0n1sl] {
+        padding-top: 2rem;
+    }
+
+    .nav-item:last-of-type[b-beekq0n1sl] {
+        padding-bottom: 2rem;
+    }
+
+    .nav-item[b-beekq0n1sl]  .nav-link {
+        color: black;
+        background: none;
+        border: none;
+        border-radius: 4px;
+        height: 5rem;
+        display: flex;
+        align-items: center;
+        line-height: 3rem;
+        width: 100%;
+    }
+
+.nav-item[b-beekq0n1sl]  a.active {
+    background-color: rgba(255,255,255,0.37);
+    color: white;
+}
+
+.nav-item[b-beekq0n1sl]  .nav-link:hover {
+    background-color: rgba(255,255,255,0.1);
+    color: white;
+}
+
+.nav-scrollable[b-beekq0n1sl] {
+    display: none;
+}
+
+.navbar-toggler:checked ~ .nav-scrollable[b-beekq0n1sl] {
+    display: block;
+}
+
+@media (min-width: 641px) {
+    .navbar-toggler[b-beekq0n1sl] {
+        display: none;
+    }
+
+    .nav-scrollable[b-beekq0n1sl] {
+        /* Never collapse the sidebar for wide screens */
+        display: block;
+
+        /* Allow sidebar to scroll for tall menus */
+        height: calc(100vh - 3.5rem);
+        overflow-y: auto;
+    }
+}
+/* /Components/Layout/ReconnectModal.razor.rz.scp.css */
+.components-reconnect-first-attempt-visible[b-qs8nvmtnfo],
+.components-reconnect-repeated-attempt-visible[b-qs8nvmtnfo],
+.components-reconnect-failed-visible[b-qs8nvmtnfo],
+.components-pause-visible[b-qs8nvmtnfo],
+.components-resume-failed-visible[b-qs8nvmtnfo],
+.components-rejoining-animation[b-qs8nvmtnfo] {
+    display: none;
+}
+
+#components-reconnect-modal.components-reconnect-show .components-reconnect-first-attempt-visible[b-qs8nvmtnfo],
+#components-reconnect-modal.components-reconnect-show .components-rejoining-animation[b-qs8nvmtnfo],
+#components-reconnect-modal.components-reconnect-paused .components-pause-visible[b-qs8nvmtnfo],
+#components-reconnect-modal.components-reconnect-resume-failed .components-resume-failed-visible[b-qs8nvmtnfo],
+#components-reconnect-modal.components-reconnect-retrying[b-qs8nvmtnfo],
+#components-reconnect-modal.components-reconnect-retrying .components-reconnect-repeated-attempt-visible[b-qs8nvmtnfo],
+#components-reconnect-modal.components-reconnect-retrying .components-rejoining-animation[b-qs8nvmtnfo],
+#components-reconnect-modal.components-reconnect-failed[b-qs8nvmtnfo],
+#components-reconnect-modal.components-reconnect-failed .components-reconnect-failed-visible[b-qs8nvmtnfo] {
+    display: block;
+}
+
+
+#components-reconnect-modal[b-qs8nvmtnfo] {
+    background-color: white;
+    width: 20rem;
+    margin: 20vh auto;
+    padding: 2rem;
+    border: 0;
+    border-radius: 0.5rem;
+    box-shadow: 0 3px 6px 2px rgba(0, 0, 0, 0.3);
+    opacity: 0;
+    transition: display 0.5s allow-discrete, overlay 0.5s allow-discrete;
+    animation: components-reconnect-modal-fadeOutOpacity-b-qs8nvmtnfo 0.5s both;
+    &[open]
+
+{
+    animation: components-reconnect-modal-slideUp-b-qs8nvmtnfo 1.5s cubic-bezier(.05, .89, .25, 1.02) 0.3s, components-reconnect-modal-fadeInOpacity-b-qs8nvmtnfo 0.5s ease-in-out 0.3s;
+    animation-fill-mode: both;
+}
+
+}
+
+#components-reconnect-modal[b-qs8nvmtnfo]::backdrop {
+    background-color: rgba(0, 0, 0, 0.4);
+    animation: components-reconnect-modal-fadeInOpacity-b-qs8nvmtnfo 0.5s ease-in-out;
+    opacity: 1;
+}
+
+@keyframes components-reconnect-modal-slideUp-b-qs8nvmtnfo {
+    0% {
+        transform: translateY(30px) scale(0.95);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
+}
+
+@keyframes components-reconnect-modal-fadeInOpacity-b-qs8nvmtnfo {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes components-reconnect-modal-fadeOutOpacity-b-qs8nvmtnfo {
+    0% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+.components-reconnect-container[b-qs8nvmtnfo] {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+#components-reconnect-modal p[b-qs8nvmtnfo] {
+    margin: 0;
+    text-align: center;
+}
+
+#components-reconnect-modal button[b-qs8nvmtnfo] {
+    border: 0;
+    background-color: #6b9ed2;
+    color: white;
+    padding: 4px 24px;
+    border-radius: 4px;
+}
+
+    #components-reconnect-modal button:hover[b-qs8nvmtnfo] {
+        background-color: #3b6ea2;
+    }
+
+    #components-reconnect-modal button:active[b-qs8nvmtnfo] {
+        background-color: #6b9ed2;
+    }
+
+.components-rejoining-animation[b-qs8nvmtnfo] {
+    position: relative;
+    width: 80px;
+    height: 80px;
+}
+
+    .components-rejoining-animation div[b-qs8nvmtnfo] {
+        position: absolute;
+        border: 3px solid #0087ff;
+        opacity: 1;
+        border-radius: 50%;
+        animation: components-rejoining-animation-b-qs8nvmtnfo 1.5s cubic-bezier(0, 0.2, 0.8, 1) infinite;
+    }
+
+        .components-rejoining-animation div:nth-child(2)[b-qs8nvmtnfo] {
+            animation-delay: -0.5s;
+        }
+
+@keyframes components-rejoining-animation-b-qs8nvmtnfo {
+    0% {
+        top: 40px;
+        left: 40px;
+        width: 0;
+        height: 0;
+        opacity: 0;
+    }
+
+    4.9% {
+        top: 40px;
+        left: 40px;
+        width: 0;
+        height: 0;
+        opacity: 0;
+    }
+
+    5% {
+        top: 40px;
+        left: 40px;
+        width: 0;
+        height: 0;
+        opacity: 1;
+    }
+
+    100% {
+        top: 0px;
+        left: 0px;
+        width: 80px;
+        height: 80px;
+        opacity: 0;
+    }
+}
+/* /Components/Pages/Aboutus.razor.rz.scp.css */
+h1[b-50pqct9c3l]{
+    font-family: 'League Spartan', sans-serif;
+    font-weight: bold;
+}
+
+h2[b-50pqct9c3l]{
+    font-family: 'League Spartan', sans-serif;
+}
+h3[b-50pqct9c3l]{
+    font-family: 'League Spartan', sans-serif;
+}
+/* Styles for the About Us images section */
+.aboutus-images[b-50pqct9c3l]{
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    gap: 50px;
+}
+/* Every image container */
+.aboutus-image[b-50pqct9c3l] {
+    position: relative;
+    overflow: hidden;
+}
+
+/* Image */
+.aboutus-image img[b-50pqct9c3l] {
+    width: 500px;
+    height: auto;
+    display: block;
+}
+
+/* Overlay */
+.image-overlay[b-50pqct9c3l] {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 191, 99, 0.85);
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    color: white;
+    font-family: 'League Spartan';
+    text-align: center;
+
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+/* Hover εμφάνιση */
+.aboutus-image:hover .image-overlay[b-50pqct9c3l] {
+    opacity: 1;
+}
+
+/* /Components/Pages/AddProduct.razor.rz.scp.css */
+/* Styles for the add product container */
+.add_container[b-mvfa42ru7w] {
+    display: flex;
+    flex-direction: row;      
+    justify-content: center; 
+    gap: 15px;                
+    margin-bottom: 15px;
+    font-family: 'League Spartan', sans-serif;
+}
+
+/* Styles for individual fields */
+.add_field[b-mvfa42ru7w] {
+    display: flex;
+    flex-direction: column;
+}
+
+.add_field label[b-mvfa42ru7w] {
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+/* Heading styles */
+h1[b-mvfa42ru7w]
+{
+      font-family: 'League Spartan', sans-serif;
+      font-weight: bold;
+}
+
+h2[b-mvfa42ru7w]
+{
+      font-family: 'League Spartan', sans-serif;
+}
+
+.btn-primary[b-mvfa42ru7w] {
+    background-color: #4CAF50; 
+    border: none;
+    font-family: 'League Spartan', sans-serif;
+}
+/* /Components/Pages/Cart.razor.rz.scp.css */
+h1[b-tcc215lmzw]{
+    font-family: 'League Spartan', sans-serif;
+    font-weight: bold;
+}
+*[b-tcc215lmzw] {
+    font-family: 'League Spartan', sans-serif;
+}
+/* /Components/Pages/Home.razor.rz.scp.css */
+/* This css file is scoped to the Home component */
+
+/* This container holds both the image carousel and the text section */
+.main_container[b-hjg69j352y] {
+    display: flex;
+    gap: 0;
+    align-items: stretch;
+    margin-left: -2rem;
+    width: calc(100% + 3.5rem);
+}
+/* Image Carousel Section */
+.image_container[b-hjg69j352y] {
+    flex: 0 0 70%;
+}
+
+.image_carousel[b-hjg69j352y] {
+    width: 100%;
+}
+
+.carousel[b-hjg69j352y] {
+    height: 500px;
+    border-radius: 0;
+    overflow: hidden;
+}
+
+.carousel-item[b-hjg69j352y] {
+    height: 500px;
+}
+
+.carousel-item img[b-hjg69j352y] {
+    object-fit: cover;
+    height: 100%;
+    width: 100%;
+    
+}
+
+.carousel-caption h1[b-hjg69j352y]{
+    color:white;
+    font-family: 'League Spartan';
+    font-weight: bold;
+    font-size: 3.7rem;
+}
+
+.carousel-caption[b-hjg69j352y] {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+/* Text Section */
+.text_container[b-hjg69j352y] {
+    flex: 0 0 30%;
+    background-color: #00bf63;
+    padding: 2rem;
+    border-radius: 0;
+    height: 500px;
+}
+/* Centering the text content vertically and horizontally */
+.background[b-hjg69j352y] {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.text_content[b-hjg69j352y] {
+    width: 100%;
+    color: black;
+    font-size: 1.0rem;
+    line-height: 1.6;
+    font-family: 'League Spartan';
+    font-weight: bold;
+}
+/* Product Buttons Container */
+.buttons_container[b-hjg69j352y] {
+    margin-top: 4rem;
+    display: flex;
+    gap: 4rem;
+    justify-content: center;
+}
+
+/* Product Buttons Section */
+.product_button[b-hjg69j352y] {
+    height: 220px;
+    width: auto;
+    margin-top: 1.5rem;
+    background-color: transparent;
+    border: none;
+}
+
+.product_button:hover[b-hjg69j352y] {
+    cursor: pointer;
+    transform: scale(0.8);
+    transition: transform 0.3s ease;
+}
+.product_button img[b-hjg69j352y]{
+    height: 170px;
+    width: auto;
+}
+
+/* Cotnainer for every product button and text */
+.product_item[b-hjg69j352y] {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+}
+
+/* Text under the buttons */
+.product_text[b-hjg69j352y] {
+    margin-top: -2px;
+    font-size: 1.5rem;
+    font-family: 'League Spartan';
+    font-weight: bold;
+    color: black;
+
+    opacity: 0;
+    transform: translateY(-8px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    pointer-events: none;
+}
+
+/* Pop text on hover */
+.product_item:hover .product_text[b-hjg69j352y] {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.product_buttons[b-hjg69j352y]{
+    margin-top: -3rem;
+}
+/* /Components/Pages/Login.razor.rz.scp.css */
+:host[b-j4icn0u1wz] {
+    font-family: 'League Spartan', sans-serif;
+}
+h1[b-j4icn0u1wz]{
+    font-family: 'League Spartan', sans-serif;
+    font-weight: bold;
+}
+.btn[b-j4icn0u1wz] {
+    font-family: 'League Spartan', sans-serif;
+    background-color: #00bf63;
+    border: none;
+}
+.mb-3 label[b-j4icn0u1wz] {
+    justify-content: center;
+    font-family: 'League Spartan', sans-serif;
+    align-items: center;
+}
+/* /Components/Pages/OurSolutions.razor.rz.scp.css */
+h1[b-8nds6ayiuh]{
+    font-family: 'League Spartan', sans-serif;
+    font-weight: bold;
+}
+
+h2[b-8nds6ayiuh]{
+    font-family: 'League Spartan', sans-serif;
+    font-weight: bold;
+}
+h3[b-8nds6ayiuh]{
+    font-family: 'League Spartan', sans-serif;
+}
+
+.category-image img[b-8nds6ayiuh]{
+    width: 400px;
+    height: auto;
+}
+.category-container[b-8nds6ayiuh]{
+    margin-bottom: 50px;;
+}
+.images-container[b-8nds6ayiuh]{
+    justify-content: center;
+    flex-direction: row;
+    display: flex;
+    gap: 20px;
+    margin-top: 100px;
+    margin-bottom: 100px;
+}
+/* /Components/Pages/Shop.razor.rz.scp.css */
+h1[b-h5i316zjw0]{
+   color: black;
+   font-family: 'League Spartan', sans-serif;
+   font-weight: bold;
+}
+
+.table[b-h5i316zjw0] {
+    font-family: 'League Spartan', sans-serif;
+    text-align: center;
+}
+td div[b-h5i316zjw0] {
+    max-width: 400px;
+}
+.btn-primary[b-h5i316zjw0] {
+    background-color: #00bf63;
+    border-color: #00bf63;
+    font-family: 'League Spartan', sans-serif;
+}

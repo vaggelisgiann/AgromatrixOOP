@@ -1,0 +1,245 @@
+@page "/add-product"
+@rendermode InteractiveServer
+@using Agromatrix.Models
+@using Agromatrix.Services
+@using Microsoft.AspNetCore.Components.Forms
+
+@inject AuthService AuthService
+@inject IProductService ProductService
+@inject NavigationManager NavManager
+
+<h1>ADD PRODUCT</h1>
+
+@if (!AuthService.IsUserAdmin)
+{
+    <p>Unauthorized. Redirecting...</p>
+}
+else
+{
+    <h2>Here, you can add a new product to the inventory:</h2>
+
+    @* Add FormName for AntiForgery *@
+    <EditForm Model="@newProduct" OnValidSubmit="HandleAddProduct" FormName="AddProductForm">
+        <AntiforgeryToken />
+        <DataAnnotationsValidator />
+        <ValidationSummary />
+        
+        <div class="add_container">
+            <div class="add_field mb-2">
+                <label>Name:</label>
+                <InputText class="form-control" @bind-Value="newProduct.Name" />
+            </div>
+
+            <div class="add_field mb-2">
+                <label>Description:</label>
+                <InputText class="form-control" @bind-Value="newProduct.Description" />
+            </div>
+
+            <div class="add_field mb-2">
+                <label>Category:</label>
+                <InputText class="form-control" @bind-Value="newProduct.Category" />
+            </div>
+
+            <div class="add_field mb-2">
+                <label>Price:</label>
+                <InputNumber class="form-control" @bind-Value="newProduct.Price" />
+            </div>
+
+            <div class="add_field mb-3">
+                <label>Image URL:</label>
+                <InputText class="form-control" @bind-Value="newProduct.ImageUrl" />
+            </div>
+
+            <button type="submit" class="btn btn-primary">Save Product</button>
+        </div>
+
+        @if (!string.IsNullOrEmpty(statusMessage))
+        {
+            <div class="alert alert-info mt-3">@statusMessage</div>
+        }
+    </EditForm>
+
+    <hr />
+
+    @* EDIT FORM *@
+    @if (isEditMode && editProduct != null)
+    {
+        <h2>Edit Product</h2>
+
+        <EditForm Model="@editProduct" OnValidSubmit="HandleUpdateProduct">
+            <DataAnnotationsValidator />
+            <ValidationSummary />
+
+            <div class="add_container">
+                <div class="add_field mb-2">
+                    <label>Name:</label>
+                    <InputText class="form-control" @bind-Value="editProduct.Name" />
+                </div>
+
+                <div class="add_field mb-2">
+                    <label>Description:</label>
+                    <InputText class="form-control" @bind-Value="editProduct.Description" />
+                </div>
+
+                <div class="add_field mb-2">
+                    <label>Category:</label>
+                    <InputText class="form-control" @bind-Value="editProduct.Category" />
+                </div>
+
+                <div class="add_field mb-2">
+                    <label>Price:</label>
+                    <InputNumber class="form-control" @bind-Value="editProduct.Price" />
+                </div>
+
+                <div class="add_field mb-3">
+                    <label>Image URL:</label>
+                    <InputText class="form-control" @bind-Value="editProduct.ImageUrl" />
+                </div>
+
+                <button type="submit" class="btn btn-success me-2">Save Changes</button>
+                <button type="button" class="btn btn-secondary" @onclick="CancelEdit">Cancel</button>
+            </div>
+        </EditForm>
+
+        <hr />
+    }
+
+    <h2>Existing Products</h2>
+
+    @if (products == null || !products.Any())
+    {
+        <p>No products found in the database.</p>
+    }
+    else
+    {
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Image</th>
+                    <th>Name</th>
+                    <th>Category</th>
+                    <th>Price</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var p in products)
+                {
+                    <tr>
+                        <td>
+                            <img src="@p.ImageUrl" alt="@p.Name" style="max-width:200px; height:auto" />
+                        </td>
+                        <td class="align-middle">@p.Name</td>
+                        <td class="align-middle">@p.Category</td>
+                        <td class="align-middle">@p.Price €</td>
+                        <td class="align-middle">
+                            <button class="btn btn-warning btn-sm me-2"
+                                    @onclick="() => StartEditProduct(p)">
+                                Edit
+                            </button>
+
+                            <button class="btn btn-danger btn-sm"
+                                    @onclick="async () => await DeleteProductAsync(p.Id)">
+                                Remove
+                            </button>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+}
+
+@code {
+    [SupplyParameterFromForm]// To protect against CSRF attacks
+    private Product newProduct { get; set; } = new();// New product to be added
+
+    private Product? editProduct;// Product being edited
+    private bool isEditMode = false;// Flag to indicate if we are in edit mode
+
+    private string? statusMessage;// Status message to display feedback to the user
+    private List<Product> products = new();// List of existing products
+
+    protected override async Task OnInitializedAsync()// Redirect non-admin users and load products
+    {
+        if (!AuthService.IsUserAdmin)
+        {
+            NavManager.NavigateTo("/login");
+            return;
+        }
+
+        await LoadProductsAsync();
+    }
+
+    private async Task HandleAddProduct()// Handle adding a new product
+    {
+        try 
+        {
+            await ProductService.AddProductAsync(newProduct);
+            statusMessage = $"Product '{newProduct.Name}' added successfully!";
+            newProduct = new Product();
+            await LoadProductsAsync();
+        }
+        catch (Exception ex)
+        {
+            statusMessage = $"Error: {ex.Message}";
+        }
+    }
+
+    private async Task LoadProductsAsync()// Load existing products from the database
+    {
+        products = await ProductService.GetAllAsync();
+    }
+
+    private async Task DeleteProductAsync(int id)// Handle deleting a product
+    {
+        if (!AuthService.IsUserAdmin)
+        {
+            statusMessage = "Unauthorized - cannot delete product.";
+            return;
+        }
+
+        await ProductService.DeleteAsync(id);
+        await LoadProductsAsync();
+        statusMessage = "Product removed.";
+    }
+
+    private void StartEditProduct(Product p)// Start editing a product
+    {
+        editProduct = new Product
+        {
+            Id = p.Id,
+            Name = p.Name,
+            Description = p.Description,
+            Category = p.Category,
+            Price = p.Price,
+            ImageUrl = p.ImageUrl
+        };
+
+        isEditMode = true;
+    }
+
+    private void CancelEdit()// Cancel editing a product
+    {
+        isEditMode = false;
+        editProduct = null;
+    }
+
+    private async Task HandleUpdateProduct()// Handle updating a product
+    {
+        if (editProduct == null) return;
+
+        try
+        {
+            await ProductService.UpdateAsync(editProduct);
+            statusMessage = $"Product '{editProduct.Name}' updated successfully!";
+            isEditMode = false;
+            editProduct = null;
+            await LoadProductsAsync();
+        }
+        catch (Exception ex)
+        {
+            statusMessage = $"Error: {ex.Message}";
+        }
+    }
+}

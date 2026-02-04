@@ -1,0 +1,28 @@
+h1{
+    font-family: 'League Spartan', sans-serif;
+    font-weight: bold;
+}
+
+h2{
+    font-family: 'League Spartan', sans-serif;
+    font-weight: bold;
+}
+h3{
+    font-family: 'League Spartan', sans-serif;
+}
+
+.category-image img{
+    width: 400px;
+    height: auto;
+}
+.category-container{
+    margin-bottom: 50px;;
+}
+.images-container{
+    justify-content: center;
+    flex-direction: row;
+    display: flex;
+    gap: 20px;
+    margin-top: 100px;
+    margin-bottom: 100px;
+}

@@ -1,0 +1,66 @@
+﻿@inject Agromatrix.Services.AuthService AuthService
+@inject NavigationManager NavManager
+@rendermode InteractiveServer
+
+<div class="nav-scrollable" onclick="document.querySelector('.navbar-toggler').click()">
+    <nav class="nav flex-column">
+
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="/" Match="NavLinkMatch.All">HOME</NavLink>
+        </div>
+
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="/shopnow">SHOP NOW</NavLink>
+        </div>
+
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="/aboutus">ABOUT US</NavLink>
+        </div>
+
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="/oursolutions">OUR SOLUTIONS</NavLink>
+        </div>
+
+        <!-- Admin specific link -->
+        @if (AuthService.IsUserAdmin)
+        {
+            <div class="nav-item px-3">
+                <NavLink class="nav-link" href="/add-product">ADD PRODUCT</NavLink>
+            </div>
+        }
+        <!-- Admin specific link -->
+        @if (!AuthService.IsUserAdmin)
+        {
+            <div class="nav-item px-3">
+                <NavLink class="nav-link" href="/login">LOGIN</NavLink>
+            </div>
+        }
+        else 
+        {
+            <div class="nav-item px-3">
+                <button class="nav-link" style="cursor:pointer" @onclick="Logout">LOGOUT</button>
+            </div>
+        }
+
+    </nav>
+</div>
+
+@code {
+    protected override void OnInitialized()// Subscribe to authentication state changes to update the UI accordingly
+    {
+        AuthService.OnChange += StateHasChanged;
+    }
+
+    public void Dispose()// Unsubscribe from authentication state changes to prevent memory leaks
+    {
+        AuthService.OnChange -= StateHasChanged;
+    }
+
+    private void Logout()// Handle logout action
+    {
+        AuthService.Logout();
+        NavManager.NavigateTo("/");
+    }
+}
+
+@implements IDisposable// Implement IDisposable to clean up event subscriptions

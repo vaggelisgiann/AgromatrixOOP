@@ -1,0 +1,160 @@
+﻿@page "/shopnow"
+@rendermode InteractiveServer
+@using Agromatrix.Models
+@using Agromatrix.Services
+@using Microsoft.AspNetCore.WebUtilities
+
+@inject IProductService ProductService
+@inject CartService CartService
+@inject NavigationManager NavManager
+
+<PageTitle>Shop Now</PageTitle>
+
+<h1>SHOP NOW</h1>
+
+@if (!string.IsNullOrEmpty(statusMessage))
+{
+    <div class="alert alert-success">@statusMessage</div>
+}
+
+@if (products == null || !products.Any())
+{
+    <p>No products found.</p>
+}
+else
+{
+    <!-- CATEGORY FILTER -->
+    <div class="mb-3">
+        <label class="form-label fw-bold">Category:</label>
+        <select class="form-select w-25" @bind="selectedCategory">
+            <option value="">All categories</option>
+            @foreach (var c in categories)
+            {
+                <option value="@c">@c</option>
+            }
+        </select>
+    </div>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>IMAGE</th>
+                <th>PRODUCT</th>
+                <th>CATEGORY</th>
+                <th>DESCRIPTION</th>
+                <th>PRICE</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var p in FilteredProducts)
+            {
+                <tr>
+                    <td>
+                        <img src="@p.ImageUrl" alt="@p.Name" width="400" />
+                    </td>
+                    <td>@p.Name</td>
+                    <td>@p.Category</td>
+                    <!-- DESCRIPTION WITH TOGGLE -->
+                    <td>
+                    <span style="cursor:pointer; color:#00bf63;font-family: 'League Spartan', sans-serif; font-weight:600;"
+                        @onclick="() => ToggleDescription(p.Id)">
+                            SEE MORE</span>
+
+                        @if (expandedProducts.Contains(p.Id))
+                        {
+                            <div class="mt-2 text-muted">
+                                @p.Description
+                            </div>
+                        }
+                    </td>
+                    <td>@p.Price €</td>
+                    <td>
+                        <input type="number"
+                               min="1"
+                               style="width:70px"
+                               @bind="quantities[p.Id]" />
+
+                        <button class="btn btn-primary ms-2"
+                                @onclick="() => AddToCart(p)">
+                            ADD TO CART
+                        </button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    List<Product> products = new();
+    Dictionary<int, int> quantities = new();
+
+    List<string> categories = new();
+    string selectedCategory = "";
+
+    private string? statusMessage;
+    // To track expanded product descriptions
+    HashSet<int> expandedProducts = new();
+
+   protected override async Task OnInitializedAsync()
+{
+    products = await ProductService.GetAllAsync();
+
+    quantities = products.ToDictionary(p => p.Id, p => 1);
+
+    categories = products
+        .Select(p => p.Category)
+        .Where(c => !string.IsNullOrWhiteSpace(c))
+        .Distinct()
+        .OrderBy(c => c)
+        .ToList();
+
+    // Διαβάζει το query string
+    var uri = NavManager.ToAbsoluteUri(NavManager.Uri);
+    if (Microsoft.AspNetCore.WebUtilities.QueryHelpers.ParseQuery(uri.Query).TryGetValue("category", out var cat))
+    {
+        selectedCategory = cat;
+    }
+
+    CartService.OnChange += OnCartChanged;
+}
+
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await CartService.InitializeAsync();
+            StateHasChanged();
+        }
+    }
+
+    IEnumerable<Product> FilteredProducts =>
+        string.IsNullOrEmpty(selectedCategory)
+            ? products
+            : products.Where(p => p.Category == selectedCategory);
+
+    private void OnCartChanged() => InvokeAsync(StateHasChanged);
+
+    private async Task AddToCart(Product p)
+    {
+        var qty = quantities.TryGetValue(p.Id, out var q) ? q : 1;
+        await CartService.AddToCartAsync(p, qty);
+        statusMessage = $"{qty} × {p.Name} added to cart.";
+    }
+
+    public void Dispose()
+    {
+        CartService.OnChange -= OnCartChanged;
+    }
+    // Toggle the description visibility for a product
+    private void ToggleDescription(int productId)
+{
+    if (!expandedProducts.Add(productId))
+    {
+        expandedProducts.Remove(productId);
+    }
+}
+
+}

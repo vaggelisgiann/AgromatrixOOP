@@ -1,0 +1,139 @@
+@page "/cart"
+@rendermode InteractiveServer
+@using Agromatrix.Models
+@using Agromatrix.Services
+@inject CartService CartService
+@inject NavigationManager NavManager
+
+<h1>YOUR CART</h1>
+<!-- Cart Items Table -->
+@if (!CartService.Items.Any())
+{
+    <p>Your cart is empty.</p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Product</th>
+                <th>Price</th>
+                <th style="width:120px">Quantity</th>
+                <th>Total</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in CartService.Items)
+            {
+                <tr>
+                    <td>@item.ProductName</td>
+                    <td>@item.Price €</td>
+                    <td>
+                        <input type="number" min="0" style="width:80px"
+                               value="@GetQuantity(item.ProductId)"
+                               @onchange="(ChangeEventArgs e) => SetQuantity(item.ProductId, e.Value)" />
+                        <button class="btn btn-sm btn-secondary ms-2" @onclick="() => UpdateQuantity(item.ProductId)">
+                            Update
+                        </button>
+                    </td>
+                    <td>@item.TotalPrice €</td>
+                    <td>
+                        <button class="btn btn-sm btn-danger" @onclick="() => Remove(item.ProductId)">
+                            Remove
+                        </button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <div class="d-flex justify-content-between align-items-center">
+        <div>
+            <button class="btn btn-outline-danger" @onclick="Clear">Clear Cart</button>
+        </div>
+        <div>
+            <strong>Grand total: </strong>@CartService.Items.Sum(i => i.TotalPrice) € 
+            <button class="btn btn-primary ms-3" @onclick="Checkout">Checkout</button>
+        </div>
+    </div>
+}
+@code {
+    private Dictionary<int,int> quantities = new();// ProductId -> Quantity
+
+    protected override void OnInitialized()// Subscribe to cart changes
+    {
+        CartService.OnChange += OnCartChanged;
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)// Initialize cart on first render
+    {
+        if (firstRender)
+        {
+            await CartService.InitializeAsync();
+            PopulateQuantities();
+            StateHasChanged();
+        }
+    }
+
+    private void PopulateQuantities()// Populate quantities dictionary from cart items
+    {
+        quantities = CartService.Items.ToDictionary(i => i.ProductId, i => Math.Max(1, i.Quantity));
+    }
+
+    private void OnCartChanged()// Handle cart changes
+    {
+        PopulateQuantities();
+        InvokeAsync(StateHasChanged);
+    }
+
+    private async Task UpdateQuantity(int productId)// Update quantity for a specific product
+    {
+        var qty = quantities.TryGetValue(productId, out var q) ? q : 1;
+        await CartService.UpdateQuantityAsync(productId, qty);
+    }
+
+    private async Task Remove(int productId)// Remove a product from the cart
+    {
+        await CartService.RemoveFromCartAsync(productId);
+    }
+
+    private string GetQuantity(int productId)// Get quantity as string for input field
+    {
+        return quantities.TryGetValue(productId, out var q) ? q.ToString() : "1";
+    }
+
+    private void SetQuantity(int productId, object? value)// Set quantity from input field
+    {
+        if (value is null)
+        {
+            quantities[productId] = 1;
+            return;
+        }
+
+        if (int.TryParse(value.ToString(), out var v))
+        {
+            quantities[productId] = Math.Max(0, v);
+        }
+        else
+        {
+            quantities[productId] = 1;
+        }
+    }
+
+    private async Task Clear()
+    {
+        await CartService.ClearAsync();
+    }
+
+    private void Checkout()
+    {
+        // replace or extend with your checkout flow
+        NavManager.NavigateTo("/");
+    }
+
+    public void Dispose()
+    {
+        CartService.OnChange -= OnCartChanged;
+    }
+}

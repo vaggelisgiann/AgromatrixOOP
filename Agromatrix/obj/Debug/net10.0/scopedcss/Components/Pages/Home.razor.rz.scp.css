@@ -1,0 +1,136 @@
+/* This css file is scoped to the Home component */
+
+/* This container holds both the image carousel and the text section */
+.main_container[b-hjg69j352y] {
+    display: flex;
+    gap: 0;
+    align-items: stretch;
+    margin-left: -2rem;
+    width: calc(100% + 3.5rem);
+}
+/* Image Carousel Section */
+.image_container[b-hjg69j352y] {
+    flex: 0 0 70%;
+}
+
+.image_carousel[b-hjg69j352y] {
+    width: 100%;
+}
+
+.carousel[b-hjg69j352y] {
+    height: 500px;
+    border-radius: 0;
+    overflow: hidden;
+}
+
+.carousel-item[b-hjg69j352y] {
+    height: 500px;
+}
+
+.carousel-item img[b-hjg69j352y] {
+    object-fit: cover;
+    height: 100%;
+    width: 100%;
+    
+}
+
+.carousel-caption h1[b-hjg69j352y]{
+    color:white;
+    font-family: 'League Spartan';
+    font-weight: bold;
+    font-size: 3.7rem;
+}
+
+.carousel-caption[b-hjg69j352y] {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+/* Text Section */
+.text_container[b-hjg69j352y] {
+    flex: 0 0 30%;
+    background-color: #00bf63;
+    padding: 2rem;
+    border-radius: 0;
+    height: 500px;
+}
+/* Centering the text content vertically and horizontally */
+.background[b-hjg69j352y] {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.text_content[b-hjg69j352y] {
+    width: 100%;
+    color: black;
+    font-size: 1.0rem;
+    line-height: 1.6;
+    font-family: 'League Spartan';
+    font-weight: bold;
+}
+/* Product Buttons Container */
+.buttons_container[b-hjg69j352y] {
+    margin-top: 4rem;
+    display: flex;
+    gap: 4rem;
+    justify-content: center;
+}
+
+/* Product Buttons Section */
+.product_button[b-hjg69j352y] {
+    height: 220px;
+    width: auto;
+    margin-top: 1.5rem;
+    background-color: transparent;
+    border: none;
+}
+
+.product_button:hover[b-hjg69j352y] {
+    cursor: pointer;
+    transform: scale(0.8);
+    transition: transform 0.3s ease;
+}
+.product_button img[b-hjg69j352y]{
+    height: 170px;
+    width: auto;
+}
+
+/* Cotnainer for every product button and text */
+.product_item[b-hjg69j352y] {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+}
+
+/* Text under the buttons */
+.product_text[b-hjg69j352y] {
+    margin-top: -2px;
+    font-size: 1.5rem;
+    font-family: 'League Spartan';
+    font-weight: bold;
+    color: black;
+
+    opacity: 0;
+    transform: translateY(-8px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    pointer-events: none;
+}
+
+/* Pop text on hover */
+.product_item:hover .product_text[b-hjg69j352y] {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.product_buttons[b-hjg69j352y]{
+    margin-top: -3rem;
+}

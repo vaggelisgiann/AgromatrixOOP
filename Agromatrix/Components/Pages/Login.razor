@@ -1,0 +1,51 @@
+@page "/login"
+@rendermode InteractiveServer
+@using Agromatrix.Services 
+@using Microsoft.AspNetCore.Components.Forms
+@using Agromatrix.Models
+@inject Agromatrix.Services.AuthService AuthService
+@inject NavigationManager NavManager
+
+<h1>LOGIN</h1>
+<!-- Login form container -->
+<div class="card p-3" style="max-width:420px">
+
+    <div class="mb-3">
+        <label>USERNAME</label>
+        <InputText class="form-control" @bind-Value="username" />
+    </div>
+
+    <div class="mb-3">
+        <label>PASSWORD</label>
+        <InputText type="password" class="form-control" @bind-Value="password" />
+    </div>
+
+    <button type="button" class="btn btn-primary" @onclick="DoLogin">
+        LOGIN
+    </button>
+
+    @if (!string.IsNullOrEmpty(message))
+    {
+        <div class="alert alert-danger mt-2">@message</div>
+    }
+</div>
+@code {
+    // Login form fields
+    private string username = "";
+    private string password = "";
+    private string message = "";
+
+    private void DoLogin()
+    {
+        AuthService.Login(username, password);
+
+        if (AuthService.IsUserAdmin)
+        {
+            NavManager.NavigateTo("/");
+        }
+        else
+        {
+            message = "Wrong credentials!";
+        }
+    }
+}

@@ -1,0 +1,37 @@
+/* Styles for the add product container */
+.add_container {
+    display: flex;
+    flex-direction: row;      
+    justify-content: center; 
+    gap: 15px;                
+    margin-bottom: 15px;
+    font-family: 'League Spartan', sans-serif;
+}
+
+/* Styles for individual fields */
+.add_field {
+    display: flex;
+    flex-direction: column;
+}
+
+.add_field label {
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+/* Heading styles */
+h1
+{
+      font-family: 'League Spartan', sans-serif;
+      font-weight: bold;
+}
+
+h2
+{
+      font-family: 'League Spartan', sans-serif;
+}
+
+.btn-primary {
+    background-color: #4CAF50; 
+    border: none;
+    font-family: 'League Spartan', sans-serif;
+}
