@@ -1,0 +1,8 @@
+CREATE TABLE products(
+id SERIAL PRIMARY KEY,
+name VARCHAR(100),
+descr VARCHAR(100),
+categ VARCHAR(100),
+price DECIMAL,
+image_url VARCHAR(100)
+);
